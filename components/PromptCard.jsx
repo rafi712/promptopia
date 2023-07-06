@@ -2,18 +2,13 @@
 
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession()
   const pathName = usePathname()
-  const router = useRouter()
   const [copied, setCopied] = useState('')
-
-  useEffect(() => {
-    console.log(prompt)
-  }, [])
 
   const handleCopy = () => {
     setCopied(prompt.prompt)

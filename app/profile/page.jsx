@@ -6,12 +6,13 @@ import { useEffect, useState } from 'react'
 import Profile from '@components/Profile'
 
 const MyProfile = () => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const router = useRouter()
   const [posts, setPosts] = useState([])
+  const [number, setNumber] = useState(1)
 
   const handleEdit = (post) => {
-    router.push(`/update-prompt/?id=${post._id}`)
+    router.push(`/update-prompt/${post._id}`)
   }
   const handleDelete = async (post) => {
     const hasConfirmed = confirm('Are you sure you want to delete this prompt?')
@@ -35,7 +36,9 @@ const MyProfile = () => {
       setPosts(data)
     }
 
-    if (session?.user.id) fetchPosts()
+    if (session?.user.id) {
+      fetchPosts()
+    }
   }, [])
 
   return (
