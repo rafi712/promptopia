@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 import Profile from '@components/Profile'
 
 const MyProfile = () => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const router = useRouter()
   const [posts, setPosts] = useState([])
+  console.log(status)
 
   const handleEdit = (post) => {
     router.push(`/update-prompt/${post._id}`)

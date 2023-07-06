@@ -6,10 +6,10 @@ import Profile from '@components/Profile'
 
 const OtherProfile = ({ params }) => {
   const [posts, setPosts] = useState([])
+  const [name, setName] = useState('')
   const { id } = params
-  const searchParams = useSearchParams()
-  const username = searchParams.get('username')
-  console.log(params)
+  // const searchParams = useSearchParams()
+  // const username = searchParams.get('username')
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -19,13 +19,20 @@ const OtherProfile = ({ params }) => {
       setPosts(data)
     }
 
+    const fetchUser = async () => {
+      const response = await fetch(`/api/users/${id}`)
+      const { username } = await response.json()
+      setName(username)
+    }
+
     fetchPosts()
+    fetchUser()
   }, [])
 
   return (
     <Profile
-      name={username}
-      desc='Welcome to your personalized profile page'
+      name={name}
+      desc={`Check out the awesome prompts ${name} wrote`}
       data={posts}
     />
   )

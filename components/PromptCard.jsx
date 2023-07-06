@@ -24,7 +24,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
           href={
             prompt.creator._id === session?.user.id
               ? '/profile'
-              : `profile/${prompt.creator._id}?username=${prompt.creator.username}`
+              : `profile/${prompt.creator._id}`
           }
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
         >
