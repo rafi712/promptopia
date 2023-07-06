@@ -8,6 +8,7 @@ import Form from '@components/Form'
 const UpdatePrompt = ({ params }) => {
   const router = useRouter()
   const { id: promptId } = params
+  console.log(promptId)
 
   const [post, setPost] = useState({ prompt: '', tag: '' })
   const [submitting, setIsSubmitting] = useState(false)

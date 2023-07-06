@@ -6,10 +6,9 @@ import { useEffect, useState } from 'react'
 import Profile from '@components/Profile'
 
 const MyProfile = () => {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   const router = useRouter()
   const [posts, setPosts] = useState([])
-  const [number, setNumber] = useState(1)
 
   const handleEdit = (post) => {
     router.push(`/update-prompt/${post._id}`)
@@ -31,15 +30,15 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      console.log('fetching data...')
       const response = await fetch(`/api/users/${session?.user.id}/posts`)
       const data = await response.json()
       setPosts(data)
     }
+    console.log(session?.user)
 
-    if (session?.user.id) {
-      fetchPosts()
-    }
-  }, [])
+    if (session?.user.id && posts.length === 0) fetchPosts()
+  }, [session])
 
   return (
     <Profile
