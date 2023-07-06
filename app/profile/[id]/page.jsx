@@ -1,8 +1,8 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Profile from '@components/Profile'
+import Loading from '../loading'
 
 const OtherProfile = ({ params }) => {
   const [posts, setPosts] = useState([])
@@ -26,12 +26,16 @@ const OtherProfile = ({ params }) => {
     fetchUser()
   }, [])
 
-  return (
-    <Profile
-      name={name}
-      desc={`Check out the awesome prompts ${name ? name : '...'} wrote`}
-      data={posts}
-    />
-  )
+  if (name) {
+    return (
+      <Profile
+        name={name}
+        desc={`Check out the awesome prompts ${name ? name : '...'} wrote`}
+        data={posts}
+      />
+    )
+  } else {
+    return <Loading />
+  }
 }
 export default OtherProfile
